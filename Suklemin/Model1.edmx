@@ -1,0 +1,1034 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище УП_01_СуклеминModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Analizators$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Eror$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="erorName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HistoryEnter$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="ip" Type="nvarchar" MaxLength="255" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="erorId" Type="int" />
+        </EntityType>
+        <EntityType Name="HistoryResearch$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderId" Type="int" />
+          <Property Name="services" Type="int" />
+        </EntityType>
+        <EntityType Name="InsuranceCompany$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insuranceCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="adress" Type="nvarchar" MaxLength="255" />
+          <Property Name="INN" Type="int" />
+          <Property Name="RC" Type="nvarchar" MaxLength="25" />
+          <Property Name="BIK" Type="nvarchar" MaxLength="53" />
+        </EntityType>
+        <EntityType Name="Order$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="userId" Type="int" />
+          <Property Name="statusOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Role$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Pictpath" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Services$">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="completionDate" Type="int" />
+          <Property Name="lowerLimitOfNormal" Type="int" />
+          <Property Name="upperLimitOfNormal" Type="int" />
+        </EntityType>
+        <EntityType Name="StatusOrder$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Users$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="secondName" Type="nvarchar" MaxLength="255" />
+          <Property Name="thirdName" Type="nvarchar" MaxLength="255" />
+          <Property Name="login" Type="nvarchar" MaxLength="255" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+          <Property Name="type" Type="int" />
+          <Property Name="birthDate" Type="date" />
+          <Property Name="passport" Type="nvarchar" MaxLength="15" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="E-mail" Type="nvarchar" MaxLength="255" />
+          <Property Name="insuranceNumber" Type="float" />
+          <Property Name="insuranceCompany" Type="int" />
+          <Property Name="role" Type="int" />
+        </EntityType>
+        <EntityType Name="Work_analizators$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="historyResearchId" Type="int" />
+          <Property Name="analisatorId" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="time" Type="int" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="result" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Work_Box$">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="companyId" Type="int" />
+          <Property Name="sum" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_HistoryEnter$_Eror$">
+          <End Role="Eror$" Type="Self.Eror$" Multiplicity="0..1" />
+          <End Role="HistoryEnter$" Type="Self.HistoryEnter$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eror$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryEnter$">
+              <PropertyRef Name="erorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryEnter$_Users$">
+          <End Role="Users$" Type="Self.Users$" Multiplicity="0..1" />
+          <End Role="HistoryEnter$" Type="Self.HistoryEnter$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryEnter$">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryResearch$_Services$">
+          <End Role="Services$" Type="Self.Services$" Multiplicity="0..1" />
+          <End Role="HistoryResearch$" Type="Self.HistoryResearch$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services$">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HistoryResearch$">
+              <PropertyRef Name="services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryResearch$_Zakaz$">
+          <End Role="Order$" Type="Self.Order$" Multiplicity="0..1" />
+          <End Role="HistoryResearch$" Type="Self.HistoryResearch$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryResearch$">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users$_insuranceCompany$">
+          <End Role="InsuranceCompany$" Type="Self.InsuranceCompany$" Multiplicity="0..1" />
+          <End Role="Users$" Type="Self.Users$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsuranceCompany$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users$">
+              <PropertyRef Name="insuranceCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users$_Role$">
+          <End Role="Role$" Type="Self.Role$" Multiplicity="0..1" />
+          <End Role="Users$" Type="Self.Users$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users$">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users$_Type$">
+          <End Role="Type$" Type="Self.Type$" Multiplicity="0..1" />
+          <End Role="Users$" Type="Self.Users$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users$">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_analizators$_Analizators$">
+          <End Role="Analizators$" Type="Self.Analizators$" Multiplicity="0..1" />
+          <End Role="Work_analizators$" Type="Self.Work_analizators$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Analizators$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators$">
+              <PropertyRef Name="analisatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_analizators$_HistoryResearch$">
+          <End Role="HistoryResearch$" Type="Self.HistoryResearch$" Multiplicity="0..1" />
+          <End Role="Work_analizators$" Type="Self.Work_analizators$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoryResearch$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators$">
+              <PropertyRef Name="historyResearchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_analizators$_Users$">
+          <End Role="Users$" Type="Self.Users$" Multiplicity="0..1" />
+          <End Role="Work_analizators$" Type="Self.Work_analizators$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators$">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_Box$_Users$">
+          <End Role="Users$" Type="Self.Users$" Multiplicity="0..1" />
+          <End Role="Work_Box$" Type="Self.Work_Box$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_Box$">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz$_statusOrder$">
+          <End Role="StatusOrder$" Type="Self.StatusOrder$" Multiplicity="0..1" />
+          <End Role="Order$" Type="Self.Order$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order$">
+              <PropertyRef Name="statusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz$_Users$">
+          <End Role="Users$" Type="Self.Users$" Multiplicity="0..1" />
+          <End Role="Order$" Type="Self.Order$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users$">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order$">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище УП_01_СуклеминModelContainer">
+          <EntitySet Name="Analizators$" EntityType="Self.Analizators$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Eror$" EntityType="Self.Eror$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryEnter$" EntityType="Self.HistoryEnter$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryResearch$" EntityType="Self.HistoryResearch$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceCompany$" EntityType="Self.InsuranceCompany$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order$" EntityType="Self.Order$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role$" EntityType="Self.Role$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services$" EntityType="Self.Services$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusOrder$" EntityType="Self.StatusOrder$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type$" EntityType="Self.Type$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users$" EntityType="Self.Users$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work_analizators$" EntityType="Self.Work_analizators$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work_Box$" EntityType="Self.Work_Box$" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HistoryEnter$_Eror$" Association="Self.FK_HistoryEnter$_Eror$">
+            <End Role="Eror$" EntitySet="Eror$" />
+            <End Role="HistoryEnter$" EntitySet="HistoryEnter$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryEnter$_Users$" Association="Self.FK_HistoryEnter$_Users$">
+            <End Role="Users$" EntitySet="Users$" />
+            <End Role="HistoryEnter$" EntitySet="HistoryEnter$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryResearch$_Services$" Association="Self.FK_HistoryResearch$_Services$">
+            <End Role="Services$" EntitySet="Services$" />
+            <End Role="HistoryResearch$" EntitySet="HistoryResearch$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryResearch$_Zakaz$" Association="Self.FK_HistoryResearch$_Zakaz$">
+            <End Role="Order$" EntitySet="Order$" />
+            <End Role="HistoryResearch$" EntitySet="HistoryResearch$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users$_insuranceCompany$" Association="Self.FK_Users$_insuranceCompany$">
+            <End Role="InsuranceCompany$" EntitySet="InsuranceCompany$" />
+            <End Role="Users$" EntitySet="Users$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users$_Role$" Association="Self.FK_Users$_Role$">
+            <End Role="Role$" EntitySet="Role$" />
+            <End Role="Users$" EntitySet="Users$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users$_Type$" Association="Self.FK_Users$_Type$">
+            <End Role="Type$" EntitySet="Type$" />
+            <End Role="Users$" EntitySet="Users$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_analizators$_Analizators$" Association="Self.FK_Work_analizators$_Analizators$">
+            <End Role="Analizators$" EntitySet="Analizators$" />
+            <End Role="Work_analizators$" EntitySet="Work_analizators$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_analizators$_HistoryResearch$" Association="Self.FK_Work_analizators$_HistoryResearch$">
+            <End Role="HistoryResearch$" EntitySet="HistoryResearch$" />
+            <End Role="Work_analizators$" EntitySet="Work_analizators$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_analizators$_Users$" Association="Self.FK_Work_analizators$_Users$">
+            <End Role="Users$" EntitySet="Users$" />
+            <End Role="Work_analizators$" EntitySet="Work_analizators$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_Box$_Users$" Association="Self.FK_Work_Box$_Users$">
+            <End Role="Users$" EntitySet="Users$" />
+            <End Role="Work_Box$" EntitySet="Work_Box$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz$_statusOrder$" Association="Self.FK_Zakaz$_statusOrder$">
+            <End Role="StatusOrder$" EntitySet="StatusOrder$" />
+            <End Role="Order$" EntitySet="Order$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz$_Users$" Association="Self.FK_Zakaz$_Users$">
+            <End Role="Users$" EntitySet="Users$" />
+            <End Role="Order$" EntitySet="Order$" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="УП_01_СуклеминModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Analizators_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Work_analizators_" Relationship="Self.FK_Work_analizators__Analizators_" FromRole="Analizators_" ToRole="Work_analizators_" />
+        </EntityType>
+        <EntityType Name="Eror_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="erorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HistoryEnter_" Relationship="Self.FK_HistoryEnter__Eror_" FromRole="Eror_" ToRole="HistoryEnter_" />
+        </EntityType>
+        <EntityType Name="HistoryEnter_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="ip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="erorId" Type="Int32" />
+          <NavigationProperty Name="Eror_" Relationship="Self.FK_HistoryEnter__Eror_" FromRole="HistoryEnter_" ToRole="Eror_" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_HistoryEnter__Users_" FromRole="HistoryEnter_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="HistoryResearch_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderId" Type="Int32" />
+          <Property Name="services" Type="Int32" />
+          <NavigationProperty Name="Services_" Relationship="Self.FK_HistoryResearch__Services_" FromRole="HistoryResearch_" ToRole="Services_" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK_HistoryResearch__Zakaz_" FromRole="HistoryResearch_" ToRole="Order_" />
+          <NavigationProperty Name="Work_analizators_" Relationship="Self.FK_Work_analizators__HistoryResearch_" FromRole="HistoryResearch_" ToRole="Work_analizators_" />
+        </EntityType>
+        <EntityType Name="InsuranceCompany_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insuranceCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="Int32" />
+          <Property Name="RC" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BIK" Type="String" MaxLength="53" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Users__insuranceCompany_" FromRole="InsuranceCompany_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="Order_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="statusOrder" Type="Int32" />
+          <NavigationProperty Name="HistoryResearch_" Relationship="Self.FK_HistoryResearch__Zakaz_" FromRole="Order_" ToRole="HistoryResearch_" />
+          <NavigationProperty Name="StatusOrder_" Relationship="Self.FK_Zakaz__statusOrder_" FromRole="Order_" ToRole="StatusOrder_" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Zakaz__Users_" FromRole="Order_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="Role_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pictpath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Users__Role_" FromRole="Role_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="Services_">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="completionDate" Type="Int32" />
+          <Property Name="lowerLimitOfNormal" Type="Int32" />
+          <Property Name="upperLimitOfNormal" Type="Int32" />
+          <NavigationProperty Name="HistoryResearch_" Relationship="Self.FK_HistoryResearch__Services_" FromRole="Services_" ToRole="HistoryResearch_" />
+        </EntityType>
+        <EntityType Name="StatusOrder_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK_Zakaz__statusOrder_" FromRole="StatusOrder_" ToRole="Order_" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Users__Type_" FromRole="Type_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="Users_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="secondName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="thirdName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="birthDate" Type="DateTime" Precision="0" />
+          <Property Name="passport" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="E_mail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="insuranceNumber" Type="Double" />
+          <Property Name="insuranceCompany" Type="Int32" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="HistoryEnter_" Relationship="Self.FK_HistoryEnter__Users_" FromRole="Users_" ToRole="HistoryEnter_" />
+          <NavigationProperty Name="InsuranceCompany_" Relationship="Self.FK_Users__insuranceCompany_" FromRole="Users_" ToRole="InsuranceCompany_" />
+          <NavigationProperty Name="Order_" Relationship="Self.FK_Zakaz__Users_" FromRole="Users_" ToRole="Order_" />
+          <NavigationProperty Name="Role_" Relationship="Self.FK_Users__Role_" FromRole="Users_" ToRole="Role_" />
+          <NavigationProperty Name="Type_" Relationship="Self.FK_Users__Type_" FromRole="Users_" ToRole="Type_" />
+          <NavigationProperty Name="Work_analizators_" Relationship="Self.FK_Work_analizators__Users_" FromRole="Users_" ToRole="Work_analizators_" />
+          <NavigationProperty Name="Work_Box_" Relationship="Self.FK_Work_Box__Users_" FromRole="Users_" ToRole="Work_Box_" />
+        </EntityType>
+        <EntityType Name="Work_analizators_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="historyResearchId" Type="Int32" />
+          <Property Name="analisatorId" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="time" Type="Int32" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="result" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Analizators_" Relationship="Self.FK_Work_analizators__Analizators_" FromRole="Work_analizators_" ToRole="Analizators_" />
+          <NavigationProperty Name="HistoryResearch_" Relationship="Self.FK_Work_analizators__HistoryResearch_" FromRole="Work_analizators_" ToRole="HistoryResearch_" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Work_analizators__Users_" FromRole="Work_analizators_" ToRole="Users_" />
+        </EntityType>
+        <EntityType Name="Work_Box_">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="companyId" Type="Int32" />
+          <Property Name="sum" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Users_" Relationship="Self.FK_Work_Box__Users_" FromRole="Work_Box_" ToRole="Users_" />
+        </EntityType>
+        <Association Name="FK_Work_analizators__Analizators_">
+          <End Role="Analizators_" Type="Self.Analizators_" Multiplicity="0..1" />
+          <End Role="Work_analizators_" Type="Self.Work_analizators_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Analizators_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators_">
+              <PropertyRef Name="analisatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryEnter__Eror_">
+          <End Role="Eror_" Type="Self.Eror_" Multiplicity="0..1" />
+          <End Role="HistoryEnter_" Type="Self.HistoryEnter_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eror_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryEnter_">
+              <PropertyRef Name="erorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryEnter__Users_">
+          <End Role="Users_" Type="Self.Users_" Multiplicity="0..1" />
+          <End Role="HistoryEnter_" Type="Self.HistoryEnter_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryEnter_">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryResearch__Services_">
+          <End Role="Services_" Type="Self.Services_" Multiplicity="0..1" />
+          <End Role="HistoryResearch_" Type="Self.HistoryResearch_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services_">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HistoryResearch_">
+              <PropertyRef Name="services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryResearch__Zakaz_">
+          <End Role="Order_" Type="Self.Order_" Multiplicity="0..1" />
+          <End Role="HistoryResearch_" Type="Self.HistoryResearch_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="HistoryResearch_">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_analizators__HistoryResearch_">
+          <End Role="HistoryResearch_" Type="Self.HistoryResearch_" Multiplicity="0..1" />
+          <End Role="Work_analizators_" Type="Self.Work_analizators_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoryResearch_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators_">
+              <PropertyRef Name="historyResearchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users__insuranceCompany_">
+          <End Role="InsuranceCompany_" Type="Self.InsuranceCompany_" Multiplicity="0..1" />
+          <End Role="Users_" Type="Self.Users_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsuranceCompany_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users_">
+              <PropertyRef Name="insuranceCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz__statusOrder_">
+          <End Role="StatusOrder_" Type="Self.StatusOrder_" Multiplicity="0..1" />
+          <End Role="Order_" Type="Self.Order_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOrder_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_">
+              <PropertyRef Name="statusOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakaz__Users_">
+          <End Role="Users_" Type="Self.Users_" Multiplicity="0..1" />
+          <End Role="Order_" Type="Self.Order_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users__Role_">
+          <End Role="Role_" Type="Self.Role_" Multiplicity="0..1" />
+          <End Role="Users_" Type="Self.Users_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users_">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users__Type_">
+          <End Role="Type_" Type="Self.Type_" Multiplicity="0..1" />
+          <End Role="Users_" Type="Self.Users_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users_">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_analizators__Users_">
+          <End Role="Users_" Type="Self.Users_" Multiplicity="0..1" />
+          <End Role="Work_analizators_" Type="Self.Work_analizators_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_analizators_">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_Box__Users_">
+          <End Role="Users_" Type="Self.Users_" Multiplicity="0..1" />
+          <End Role="Work_Box_" Type="Self.Work_Box_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users_">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Work_Box_">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BataDase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Analizators_" EntityType="Self.Analizators_" />
+          <EntitySet Name="Eror_" EntityType="Self.Eror_" />
+          <EntitySet Name="HistoryEnter_" EntityType="Self.HistoryEnter_" />
+          <EntitySet Name="HistoryResearch_" EntityType="Self.HistoryResearch_" />
+          <EntitySet Name="InsuranceCompany_" EntityType="Self.InsuranceCompany_" />
+          <EntitySet Name="Order_" EntityType="Self.Order_" />
+          <EntitySet Name="Role_" EntityType="Self.Role_" />
+          <EntitySet Name="Services_" EntityType="Self.Services_" />
+          <EntitySet Name="StatusOrder_" EntityType="Self.StatusOrder_" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Type_" EntityType="Self.Type_" />
+          <EntitySet Name="Users_" EntityType="Self.Users_" />
+          <EntitySet Name="Work_analizators_" EntityType="Self.Work_analizators_" />
+          <EntitySet Name="Work_Box_" EntityType="Self.Work_Box_" />
+          <AssociationSet Name="FK_Work_analizators__Analizators_" Association="Self.FK_Work_analizators__Analizators_">
+            <End Role="Analizators_" EntitySet="Analizators_" />
+            <End Role="Work_analizators_" EntitySet="Work_analizators_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryEnter__Eror_" Association="Self.FK_HistoryEnter__Eror_">
+            <End Role="Eror_" EntitySet="Eror_" />
+            <End Role="HistoryEnter_" EntitySet="HistoryEnter_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryEnter__Users_" Association="Self.FK_HistoryEnter__Users_">
+            <End Role="Users_" EntitySet="Users_" />
+            <End Role="HistoryEnter_" EntitySet="HistoryEnter_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryResearch__Services_" Association="Self.FK_HistoryResearch__Services_">
+            <End Role="Services_" EntitySet="Services_" />
+            <End Role="HistoryResearch_" EntitySet="HistoryResearch_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryResearch__Zakaz_" Association="Self.FK_HistoryResearch__Zakaz_">
+            <End Role="Order_" EntitySet="Order_" />
+            <End Role="HistoryResearch_" EntitySet="HistoryResearch_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_analizators__HistoryResearch_" Association="Self.FK_Work_analizators__HistoryResearch_">
+            <End Role="HistoryResearch_" EntitySet="HistoryResearch_" />
+            <End Role="Work_analizators_" EntitySet="Work_analizators_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users__insuranceCompany_" Association="Self.FK_Users__insuranceCompany_">
+            <End Role="InsuranceCompany_" EntitySet="InsuranceCompany_" />
+            <End Role="Users_" EntitySet="Users_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz__statusOrder_" Association="Self.FK_Zakaz__statusOrder_">
+            <End Role="StatusOrder_" EntitySet="StatusOrder_" />
+            <End Role="Order_" EntitySet="Order_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakaz__Users_" Association="Self.FK_Zakaz__Users_">
+            <End Role="Users_" EntitySet="Users_" />
+            <End Role="Order_" EntitySet="Order_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users__Role_" Association="Self.FK_Users__Role_">
+            <End Role="Role_" EntitySet="Role_" />
+            <End Role="Users_" EntitySet="Users_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users__Type_" Association="Self.FK_Users__Type_">
+            <End Role="Type_" EntitySet="Type_" />
+            <End Role="Users_" EntitySet="Users_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_analizators__Users_" Association="Self.FK_Work_analizators__Users_">
+            <End Role="Users_" EntitySet="Users_" />
+            <End Role="Work_analizators_" EntitySet="Work_analizators_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_Box__Users_" Association="Self.FK_Work_Box__Users_">
+            <End Role="Users_" EntitySet="Users_" />
+            <End Role="Work_Box_" EntitySet="Work_Box_" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(УП_01_СуклеминModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(УП_01_СуклеминModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище УП_01_СуклеминModelContainer" CdmEntityContainer="BataDase">
+          <EntitySetMapping Name="Analizators_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Analizators_">
+              <MappingFragment StoreEntitySet="Analizators$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eror_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Eror_">
+              <MappingFragment StoreEntitySet="Eror$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="erorName" ColumnName="erorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryEnter_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.HistoryEnter_">
+              <MappingFragment StoreEntitySet="HistoryEnter$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="erorId" ColumnName="erorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryResearch_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.HistoryResearch_">
+              <MappingFragment StoreEntitySet="HistoryResearch$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="services" ColumnName="services" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsuranceCompany_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.InsuranceCompany_">
+              <MappingFragment StoreEntitySet="InsuranceCompany$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="insuranceCompany" ColumnName="insuranceCompany" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="RC" ColumnName="RC" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Order_">
+              <MappingFragment StoreEntitySet="Order$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="statusOrder" ColumnName="statusOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Role_">
+              <MappingFragment StoreEntitySet="Role$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Pictpath" ColumnName="Pictpath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Services_">
+              <MappingFragment StoreEntitySet="Services$">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="completionDate" ColumnName="completionDate" />
+                <ScalarProperty Name="lowerLimitOfNormal" ColumnName="lowerLimitOfNormal" />
+                <ScalarProperty Name="upperLimitOfNormal" ColumnName="upperLimitOfNormal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusOrder_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.StatusOrder_">
+              <MappingFragment StoreEntitySet="StatusOrder$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Type_">
+              <MappingFragment StoreEntitySet="Type$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Users_">
+              <MappingFragment StoreEntitySet="Users$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="secondName" ColumnName="secondName" />
+                <ScalarProperty Name="thirdName" ColumnName="thirdName" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="insuranceNumber" ColumnName="insuranceNumber" />
+                <ScalarProperty Name="insuranceCompany" ColumnName="insuranceCompany" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work_analizators_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Work_analizators_">
+              <MappingFragment StoreEntitySet="Work_analizators$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="historyResearchId" ColumnName="historyResearchId" />
+                <ScalarProperty Name="analisatorId" ColumnName="analisatorId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="result" ColumnName="result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work_Box_">
+            <EntityTypeMapping TypeName="УП_01_СуклеминModel.Work_Box_">
+              <MappingFragment StoreEntitySet="Work_Box$">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище УП_01_СуклеминModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище УП_01_СуклеминModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище УП_01_СуклеминModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище УП_01_СуклеминModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="УП_01_СуклеминModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище УП_01_СуклеминModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="УП_01_СуклеминModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище УП_01_СуклеминModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище УП_01_СуклеминModel.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

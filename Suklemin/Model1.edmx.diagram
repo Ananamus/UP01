@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="649f0784f0b94883b414842114564496" Name="Diagram1">
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Analizators_" Width="1.5" PointX="10.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Eror_" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.HistoryEnter_" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.HistoryResearch_" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.InsuranceCompany_" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Order_" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Role_" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Services_" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.StatusOrder_" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.sysdiagram" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Type_" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Users_" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Work_analizators_" Width="1.5" PointX="12.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="УП_01_СуклеминModel.Work_Box_" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Work_analizators__Analizators_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_HistoryEnter__Eror_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_HistoryEnter__Users_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_HistoryResearch__Services_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_HistoryResearch__Zakaz_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Work_analizators__HistoryResearch_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Users__insuranceCompany_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Zakaz__statusOrder_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Zakaz__Users_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Users__Role_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Users__Type_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Work_analizators__Users_" ManuallyRouted="false" />
+        <AssociationConnector Association="УП_01_СуклеминModel.FK_Work_Box__Users_" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

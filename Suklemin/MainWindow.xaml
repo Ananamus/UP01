@@ -1,0 +1,31 @@
+﻿<Window x:Class="Suklemin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Suklemin"
+        mc:Ignorable="d"
+        Title="Вход" Height="450" Width="450" MinHeight="450" MaxHeight="450" MinWidth="450" MaxWidth="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Мед лабаратория                  Вход в стистему" TextAlignment="Center" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Text="Логин:" Margin="0,40,205,0" FontSize="14" />
+        <TextBox x:Name="LoginTextBox" Grid.Row="1" Width="150" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,40,0,0" />
+        <PasswordBox x:Name="PasswordBox" Height="20" Grid.Row="1" Width="150" Margin="0,90,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"/>
+        <TextBlock Margin="0,90,205,0" Grid.Row="1" Text="Пароль:" Height="20" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <TextBox x:Name="TextBox" Height="20" Grid.Row="1" Width="150" Margin="0,90,0,0"  VerticalAlignment="Top" HorizontalAlignment="Center" TextChanged="TextBox_TextChanged"/>
+        <Button Content="*" HorizontalAlignment="Center" Margin="175,90,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Height="20" FontSize="18" Padding="0" Click="hideButton_click"/>
+        <Button Grid.Row="2" Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25" FontSize="14" Content="Вход" Click="Button_Click"/>
+        <TextBox IsEnabled="False"  FontWeight="Bold" x:Name="capthText" Grid.Row="1" Margin="100,123,100,107" Text="" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.RowSpan="2" Visibility="Collapsed">
+            <TextBox.Background>
+                <ImageBrush ImageSource="CaptchaBack.png"></ImageBrush>
+            </TextBox.Background>
+        </TextBox>
+        <TextBox x:Name="capth" Grid.Row="2" VerticalAlignment="Top" Margin="0,45,0,0" Height="20" Width="150" Visibility="Collapsed"/>
+        <Button x:Name="ButtonRe" Content="↻" HorizontalAlignment="Left" Margin="347,0,0,0" Grid.Row="2"  VerticalAlignment="Top" Width="20" Height="20" Click="Button_Click_1" Visibility="Collapsed"/>
+    </Grid>
+</Window>

@@ -1,0 +1,78 @@
+﻿<Window x:Class="Suklemin.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Suklemin"
+        mc:Ignorable="d"
+        Title="Admin" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="450" MinWidth="800" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="0,0,100,0" x:Name="Name" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" Width="650" VerticalAlignment="Center" FontSize="18"/>
+        <Image  Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Администратор.png" Width="116" Height="84"/>
+        <TabControl Width="800" Grid.Row="1" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="Расходные материалы">
+                <Grid Background="#FFE5E5E5">
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="История входов" x:Name="History">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="Grid" AutoGenerateColumns="false" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding id}"/>
+                            <DataGridTextColumn Header="Логин пользователя" Binding="{Binding userlogin}"/>
+                            <DataGridTextColumn Header="ip" Binding="{Binding ip}"/>
+                            <DataGridTextColumn Header="date" Binding="{Binding date}"/>
+                            <DataGridTextColumn Header="Причина выхода" Binding="{Binding errorName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Создание пользователей">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Background="#FFE5E5E5">
+                        <TextBlock Text="Имя:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0"/>
+                        <TextBlock Text="Фамилия:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,35,0,0"/>
+                        <TextBox x:Name="FirstNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Height="20" Margin="100,5,0,0" />
+                        <TextBox x:Name="SecondNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Height="20" Margin="100,35,0,0"/>
+                        <TextBlock Text="Отчество" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,65,0,0" />
+                        <TextBox x:Name="ThirdNameTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Height="20" Margin="100,65,0,0"/>
+                        <TextBlock Text="Логин:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,95,0,0"/>
+                        <TextBox x:Name="LoginTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,95,0,0" Width="100" Height="20"/>
+                        <TextBlock Text="Пароль:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,125,0,0"/>
+                        <TextBox x:Name="PasswordTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,125,0,0" Width="100" Height="20"/>
+                        <TextBlock Text="Тип страховки:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,155,0,0"/>
+                        <ComboBox x:Name="ComboType" Width="100" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,155,0,0" DisplayMemberPath="name"/>
+                        <TextBlock Text="День рождения:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,185,0,0"/>
+                        <DatePicker x:Name="DateBirth" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,185,0,0" Width="100" Height="20" FontSize="10"/>
+                        <TextBox x:Name="PassportTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,5,0,0" MaxLength="10" Width="100" Height="20"/>
+                        <TextBlock Text="Паспорт:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,5,0,0"/>
+                        <TextBox x:Name="PhoneTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,35,0,0" Width="100" Height="20"/>
+                        <TextBlock Text="Номер телефона:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,35,0,0"/>
+                        <TextBox x:Name="EmailTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,65,0,0" Width="100" Height="20"/>
+                        <TextBlock Text="E-mail:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,65,0,0"/>
+                        <TextBox x:Name="InsNumberTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" MaxLength="15" Margin="335,95,0,0" Width="100" Height="20"/>
+                        <TextBlock Text="Номер страховки:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,95,0,0"/>
+                        <TextBlock Text="Компания:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,125,0,0"/>
+                        <ComboBox x:Name="InsCompanyCombo" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,125,0,0" Width="100" Height="20" DisplayMemberPath="insuranceCompany"/>
+                        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,185,0,0" Width="200" Height="20" Content="Добавить пользователя" Click="Button_Click_1"/>
+                        <TextBlock Text="Роль:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="235,155,0,0"/>
+                        <ComboBox x:Name="RolesCombo" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="335,155,0,0" Width="100" Height="20" DisplayMemberPath="name"/>
+                        <TextBlock Margin="450,5,20,0" Text="Логин может содержать только латинские буквы и цифры, иметь длину минимум 6 символов. Пароль должен содержать хотя бы одну букву, хотя бы один символ,хотя бы одну цифру, иметь длину минимум 8 символов." FontSize="20" Foreground="Red" TextWrapping="Wrap" FontFamily="Arial Black"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Отчёт">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <ComboBox Visibility="Collapsed" Margin="0,0,250,0" Height="25" x:Name="LoginCombobox" Grid.Row="3" VerticalAlignment="Center" Width="200"  DisplayMemberPath="login" SelectionChanged="LoginCombobox_SelectionChanged"/>
+        <DatePicker Visibility="Collapsed" x:Name="DateEnd" Grid.Row="2" Width="200" Height="25" Margin="250,30,0,0" SelectedDateChanged="DateEnd_SelectedDateChanged"/>
+        <DatePicker x:Name="DateStart" Visibility="Collapsed" Grid.Row="2" Width="200" Height="25" Margin="250,0,0,30" SelectedDateChanged="DateStart_SelectedDateChanged"/>
+    </Grid>
+</Window>
