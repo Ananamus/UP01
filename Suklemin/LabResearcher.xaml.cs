@@ -167,7 +167,7 @@ namespace Suklemin
                 if (double.TryParse(serv.result, out double result)) // ← Проверка на то является ли результат числом
                 {
                     // Проверка выходит ли результат исследования за рамки обычного результата ↓
-                    if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 && result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5)
+                    if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 || result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5)
                     {
                         // Обработка подтверждения результата, выходящего за рамки ↓
                         MessageBoxResult resultM = MessageBox.Show(Temps.services.First(x => x.Code == serv.servicecode).name + " отклоняется от нормы в 5 раз" + serv.result, "Отклонение от нормы", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
