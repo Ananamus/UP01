@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -121,31 +122,37 @@ namespace Suklemin
                     httpWebRequestBiorad.Method = "GET";
                     httpWebRequestLedetect.ContentType = "application/json";
                     httpWebRequestLedetect.Method = "GET";
-                    var httpResponseBiorad = (HttpWebResponse)httpWebRequestBiorad.GetResponse();
-                    if (httpResponseBiorad.StatusCode == HttpStatusCode.OK)
+                    if (ThisResearchs2.Count > 0)
                     {
-                        using (Stream stream = httpResponseBiorad.GetResponseStream())
+                        var httpResponseBiorad = (HttpWebResponse)httpWebRequestBiorad.GetResponse();
+                        if (httpResponseBiorad.StatusCode == HttpStatusCode.OK)
                         {
-                            StreamReader reader = new StreamReader(stream);
-                            string json = reader.ReadToEnd();
-                            JavaScriptSerializer serializer = new JavaScriptSerializer();
-                            getAnalizator = serializer.Deserialize<GetAnalizator>(json);
-                            checks(getAnalizator);
+                            using (Stream stream = httpResponseBiorad.GetResponseStream())
+                            {
+                                StreamReader reader = new StreamReader(stream);
+                                string json = reader.ReadToEnd();
+                                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                                getAnalizator = serializer.Deserialize<GetAnalizator>(json);
+                                checks(getAnalizator);
 
+                            }
                         }
                     }
-                    var httpResponseLedetect = (HttpWebResponse)httpWebRequestLedetect.GetResponse();
-                    if (httpResponseLedetect.StatusCode == HttpStatusCode.OK)
+                    if (ThisResearchs1.Count > 0)
                     {
-                        using (Stream stream = httpResponseLedetect.GetResponseStream())
+                        var httpResponseLedetect = (HttpWebResponse)httpWebRequestLedetect.GetResponse();
+                        if (httpResponseLedetect.StatusCode == HttpStatusCode.OK)
                         {
-                            StreamReader reader = new StreamReader(stream);
-                            string json = reader.ReadToEnd();
-                            JavaScriptSerializer serializer = new JavaScriptSerializer();
-                            getAnalizator = serializer.Deserialize<GetAnalizator>(json);
-                            checks(getAnalizator);
-                        }
+                            using (Stream stream = httpResponseLedetect.GetResponseStream())
+                            {
+                                StreamReader reader = new StreamReader(stream);
+                                string json = reader.ReadToEnd();
+                                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                                getAnalizator = serializer.Deserialize<GetAnalizator>(json);
+                                checks(getAnalizator);
+                            }
 
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -154,8 +161,10 @@ namespace Suklemin
                 }
                 // Получение данных от сервера ↑
                 ContentOfList.Text = allText; // ← Отображение данных на форме
+                Temps.bd.Order_.First(x => x.id == ThisOrder.id).statusOrder = 3;
+                DataGrid.ItemsSource = null;
+                DataGrid.ItemsSource = Temps.orders.Where(x => x.statusOrder == 2);
             }
-            Temps.bd.Order_.First(x => x.id == ThisOrder.id).statusOrder = 3;
         }
         string allText = null; // ← Переменная текста для вывода результатов на форму
         public void checks(GetAnalizator getAnalizator)
@@ -164,7 +173,7 @@ namespace Suklemin
             int i = 0;
             foreach (Services serv in getAnalizator.services)
             {
-                if (double.TryParse(serv.result, out double result)) // ← Проверка на то является ли результат числом
+                if (double.TryParse(serv.result, NumberStyles.Any, CultureInfo.InvariantCulture, out double result)) // ← Проверка на то является ли результат числом
                 {
                     // Проверка выходит ли результат исследования за рамки обычного результата ↓
                     if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 || result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5)
@@ -230,8 +239,6 @@ namespace Suklemin
                 //Добавление данных в бд при результате не являющимся числом ↑
                 i++;
                 Temps.ReloadLists();
-                DataGrid.ItemsSource = null;
-                DataGrid.ItemsSource = Temps.orders.Where(x => x.statusOrder == 2);
             }
         }
         /// <summary>
@@ -244,98 +251,103 @@ namespace Suklemin
             Process.Start(Environment.CurrentDirectory.ToString() + "\\Analyzer\\LIMSAnalyzers.exe");
             List<Services> services = new List<Services>();
             ThisResearchs2 = ThisResearchs.Where(x => x.analisator == 2).ToList();
-            foreach (HistoryResearch_ res in ThisResearchs2)
+            if (ThisResearchs2.Count > 0)
             {
-                Services services1 = new Services();
-                services1.servicecode = res.services.Value;
-                services.Add(services1);
-            }
-            string patient = ThisOrder.userId.ToString();
-            //
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:5000/api/analyzer/Biorad");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = new JavaScriptSerializer().Serialize(new
+                foreach (HistoryResearch_ res in ThisResearchs2)
                 {
-                    patient,
-                    services
-                });
-                streamWriter.Write(json);
-            }
-            try
-            {
-                HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                if (httpResponse.StatusCode == HttpStatusCode.OK)
-                {
-                    MessageBox.Show("Успешная отправка на Biorad");
-                    if (ProgressBar.Visibility != Visibility.Visible)
-                    {
-                        ProgressBar.Visibility = Visibility.Visible;
-                        Procent.Visibility = Visibility.Visible;
-                        researchTimer.Tick += new EventHandler(Research_Tick);
-                        researchTimer.Interval = new TimeSpan(0, 0, 1);
-                        researchTimer.Start();
-                    }
+                    Services services1 = new Services();
+                    services1.servicecode = res.services.Value;
+                    services.Add(services1);
                 }
-                else { MessageBox.Show("Ошибка отправки на Biorad"); }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                string patient = ThisOrder.userId.ToString();
+                //
 
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:5000/api/analyzer/Biorad");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = new JavaScriptSerializer().Serialize(new
+                    {
+                        patient,
+                        services
+                    });
+                    streamWriter.Write(json);
+                }
+                try
+                {
+                    HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("Успешная отправка на Biorad");
+                        if (ProgressBar.Visibility != Visibility.Visible)
+                        {
+                            ProgressBar.Visibility = Visibility.Visible;
+                            Procent.Visibility = Visibility.Visible;
+                            researchTimer.Tick += new EventHandler(Research_Tick);
+                            researchTimer.Interval = new TimeSpan(0, 0, 1);
+                            researchTimer.Start();
+                        }
+                    }
+                    else { MessageBox.Show("Ошибка отправки на Biorad"); }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
+            }
             services.Clear();
             ThisResearchs1 = ThisResearchs.Where(x => x.analisator == 1).ToList();
+            if (ThisResearchs1.Count > 0)
+            {
+                string patient = ThisOrder.userId.ToString();
 
-            foreach (HistoryResearch_ res in ThisResearchs1)
-            {
-                Services services1 = new Services();
-                services1.servicecode = res.services.Value;
-                services.Add(services1);
-            }
-            httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:5000/api/analyzer/Ledetect");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = new JavaScriptSerializer().Serialize(new
+                foreach (HistoryResearch_ res in ThisResearchs1)
                 {
-                    patient,
-                    services
-                });
-                streamWriter.Write(json);
-            }
-            try
-            {
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                if (httpResponse.StatusCode == HttpStatusCode.OK)
-                {
-                    MessageBox.Show("Успешная отправка на Ledetect");
-                    if (ProgressBar.Visibility != Visibility.Visible)
-                    {
-                        ProgressBar.Visibility = Visibility.Visible;
-                        Procent.Visibility = Visibility.Visible;
-                        researchTimer.Tick += new EventHandler(Research_Tick);
-                        researchTimer.Interval = new TimeSpan(0, 0, 1);
-                        researchTimer.Start();
-                    }
+                    Services services1 = new Services();
+                    services1.servicecode = res.services.Value;
+                    services.Add(services1);
                 }
-                else { MessageBox.Show("Ошибка отправки на Ledetect"); }
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://localhost:5000/api/analyzer/Ledetect");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = new JavaScriptSerializer().Serialize(new
+                    {
+                        patient,
+                        services
+                    });
+                    streamWriter.Write(json);
+                }
+                try
+                {
+                    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("Успешная отправка на Ledetect");
+                        if (ProgressBar.Visibility != Visibility.Visible)
+                        {
+                            ProgressBar.Visibility = Visibility.Visible;
+                            Procent.Visibility = Visibility.Visible;
+                            researchTimer.Tick += new EventHandler(Research_Tick);
+                            researchTimer.Interval = new TimeSpan(0, 0, 1);
+                            researchTimer.Start();
+                        }
+                    }
+                    else { MessageBox.Show("Ошибка отправки на Ledetect"); }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
         }
-        Order_ ThisOrder = new Order_();
-        List<HistoryResearch_> ThisResearchs = new List<HistoryResearch_>();
-        List<HistoryResearch_> ThisResearchs1 = new List<HistoryResearch_>();
-        List<HistoryResearch_> ThisResearchs2 = new List<HistoryResearch_>();
+        public static Order_ ThisOrder = new Order_();
+        static List<HistoryResearch_> ThisResearchs = new List<HistoryResearch_>();
+        static List<HistoryResearch_> ThisResearchs1 = new List<HistoryResearch_>();
+        static List<HistoryResearch_> ThisResearchs2 = new List<HistoryResearch_>();
         /// <summary>
         /// Добавление текущего заказа
         /// </summary>

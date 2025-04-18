@@ -55,9 +55,6 @@ namespace Suklemin
         /// </summary>
         public string result { get; set; }
     }
-    /// <summary>
-    /// Код для получения данных с сервера
-    /// </summary>
     public class GetAnalizator
     {
         /// <summary>
@@ -65,7 +62,7 @@ namespace Suklemin
         /// </summary>
         public string patient { get; set; }
         /// <summary>
-        /// Список результатов полученных
+        /// Список результатов полученных от анализатора
         /// </summary>
         public List<Services> services { get; set; }
         /// <summary>
