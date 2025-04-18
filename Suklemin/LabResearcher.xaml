@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <TextBlock Margin="0,0,100,0" x:Name="Name" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" Width="650" VerticalAlignment="Center" FontSize="18" Grid.ColumnSpan="2"/>
         <Image  Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right" Source="laborant_2.png" Width="116" Height="84" Grid.Column="1"/>
-        <TextBlock x:Name="TimerTextBlock" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Text="2:30:00" Grid.Column="1"/>
+        <TextBlock x:Name="TimerTextBlock" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Right" Text="2:30:00" Grid.Column="1" Margin="0,0,120,0"/>
         <DataGrid x:Name="DataGrid" IsReadOnly="True" Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged" MouseDoubleClick="DataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding id}"/>

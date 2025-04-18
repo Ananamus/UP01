@@ -299,6 +299,7 @@ namespace Suklemin
             }
             services.Clear();
             ThisResearchs1 = ThisResearchs.Where(x => x.analisator == 1).ToList();
+
             if (ThisResearchs1.Count > 0)
             {
                 string patient = ThisOrder.userId.ToString();
