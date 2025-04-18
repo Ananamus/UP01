@@ -133,7 +133,7 @@ namespace Suklemin
                                 string json = reader.ReadToEnd();
                                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                                 getAnalizator = serializer.Deserialize<GetAnalizator>(json);
-                                checks(getAnalizator);
+                                checks2(getAnalizator);
 
                             }
                         }
@@ -151,7 +151,6 @@ namespace Suklemin
                                 getAnalizator = serializer.Deserialize<GetAnalizator>(json);
                                 checks(getAnalizator);
                             }
-
                         }
                     }
                 }
@@ -166,7 +165,7 @@ namespace Suklemin
                 DataGrid.ItemsSource = Temps.orders.Where(x => x.statusOrder == 2);
             }
         }
-        string allText = null; // ← Переменная текста для вывода результатов на форму
+        static string allText = null; // ← Переменная текста для вывода результатов на форму
         public void checks(GetAnalizator getAnalizator)
         {
 
@@ -176,11 +175,11 @@ namespace Suklemin
                 if (double.TryParse(serv.result, NumberStyles.Any, CultureInfo.InvariantCulture, out double result)) // ← Проверка на то является ли результат числом
                 {
                     // Проверка выходит ли результат исследования за рамки обычного результата ↓
-                    if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 || result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5)
+                    if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 || result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5) 
                     {
                         // Обработка подтверждения результата, выходящего за рамки ↓
                         MessageBoxResult resultM = MessageBox.Show(Temps.services.First(x => x.Code == serv.servicecode).name + " отклоняется от нормы в 5 раз" + serv.result, "Отклонение от нормы", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-                        if (resultM == MessageBoxResult.Yes)
+                        if (resultM == MessageBoxResult.OK)
                         {
                             Work_analizators_ workanaliz = new Work_analizators_()
                             {
@@ -231,6 +230,80 @@ namespace Suklemin
                         result = serv.result,
                         historyResearchId = ThisResearchs1[i].id,
                         time = ThisResearchs1[i].Services_.completionDate
+                    };
+                    Temps.bd.Work_analizators_.Add(workanaliz);
+                    Temps.bd.SaveChanges();
+                    allText += Temps.services.First(x => x.Code == serv.servicecode).name + " " + serv.result + "\n";
+                }
+                //Добавление данных в бд при результате не являющимся числом ↑
+                i++;
+                Temps.ReloadLists();
+            }
+        }
+        public void checks2(GetAnalizator getAnalizator)
+        {
+
+            int i = 0;
+            foreach (Services serv in getAnalizator.services)
+            {
+                if (double.TryParse(serv.result, NumberStyles.Any, CultureInfo.InvariantCulture, out double result)) // ← Проверка на то является ли результат числом
+                {
+                    // Проверка выходит ли результат исследования за рамки обычного результата ↓
+                    if (result > Temps.services.First(x => x.Code == serv.servicecode).upperLimitOfNormal * 5 || result < Temps.services.First(x => x.Code == serv.servicecode).lowerLimitOfNormal / 5)
+                    {
+                        // Обработка подтверждения результата, выходящего за рамки ↓
+                        MessageBoxResult resultM = MessageBox.Show(Temps.services.First(x => x.Code == serv.servicecode).name + " отклоняется от нормы в 5 раз" + serv.result, "Отклонение от нормы", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                        if (resultM == MessageBoxResult.OK)
+                        {
+                            Work_analizators_ workanaliz = new Work_analizators_()
+                            {
+                                analisatorId = 1,
+                                date = DateTime.Now,
+                                employeeId = Temps.user.id,
+                                result = serv.result,
+                                historyResearchId = ThisResearchs2[i].id,
+                                time = ThisResearchs2[i].Services_.completionDate
+                            };
+                            Temps.bd.Work_analizators_.Add(workanaliz);
+                            Temps.bd.SaveChanges();
+                            allText += Temps.services.First(x => x.Code == serv.servicecode).name + " " + serv.result + "\n";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Отменён");
+                        }
+                        // Обработка подтверждения результата, выходящего за рамки ↑
+                    }
+                    // Результат является нормой ↓
+                    else
+                    {
+                        Work_analizators_ workanaliz = new Work_analizators_()
+                        {
+                            analisatorId = 1,
+                            date = DateTime.Now,
+                            employeeId = Temps.user.id,
+                            result = serv.result,
+                            historyResearchId = ThisResearchs2[i].id,
+                            time = ThisResearchs2[i].Services_.completionDate
+                        };
+                        Temps.bd.Work_analizators_.Add(workanaliz);
+                        Temps.bd.SaveChanges();
+                        allText += Temps.services.First(x => x.Code == serv.servicecode).name + " " + serv.result + "\n";
+                    }
+                    // Результат является нормой ↑
+                    // Проверка выходит ли результат исследования за рамки обычного результата ↑
+                }
+                //Добавление данных в бд при результате не являющимся числом ↓
+                else
+                {
+                    Work_analizators_ workanaliz = new Work_analizators_()
+                    {
+                        analisatorId = 1,
+                        date = DateTime.Now,
+                        employeeId = Temps.user.id,
+                        result = serv.result,
+                        historyResearchId = ThisResearchs2[i].id,
+                        time = ThisResearchs2[i].Services_.completionDate
                     };
                     Temps.bd.Work_analizators_.Add(workanaliz);
                     Temps.bd.SaveChanges();
@@ -295,7 +368,7 @@ namespace Suklemin
                 {
                     MessageBox.Show(ex.Message);
                 }
-
+                tiks = 0;
             }
             services.Clear();
             ThisResearchs1 = ThisResearchs.Where(x => x.analisator == 1).ToList();
