@@ -15,11 +15,6 @@
         <TextBlock Margin="0,0,100,0" x:Name="Name" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" Width="650" VerticalAlignment="Center" FontSize="18"/>
         <Image  Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Source="Администратор.png" Width="116" Height="84"/>
         <TabControl Width="800" Grid.Row="1" SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="Расходные материалы">
-                <Grid Background="#FFE5E5E5">
-
-                </Grid>
-            </TabItem>
             <TabItem Header="История входов" x:Name="History">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="Grid" AutoGenerateColumns="false" IsReadOnly="True">
@@ -66,9 +61,6 @@
                         <TextBlock Margin="450,5,20,0" Text="Логин может содержать только латинские буквы и цифры, иметь длину минимум 6 символов. Пароль должен содержать хотя бы одну букву, хотя бы один символ,хотя бы одну цифру, иметь длину минимум 8 символов." FontSize="20" Foreground="Red" TextWrapping="Wrap" FontFamily="Arial Black"/>
                     </Grid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Отчёт">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
         <ComboBox Visibility="Collapsed" Margin="0,0,250,0" Height="25" x:Name="LoginCombobox" Grid.Row="3" VerticalAlignment="Center" Width="200"  DisplayMemberPath="login" SelectionChanged="LoginCombobox_SelectionChanged"/>

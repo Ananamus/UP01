@@ -85,12 +85,9 @@
                             <DataGridTextColumn Header="Услуги" Binding="{Binding services}"/>
                             <DataGridTextColumn Header="Стоимость услуги" Binding="{Binding Services_.price}"/>
                         </DataGrid.Columns>
-                        
+
                     </DataGrid>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Отчёт">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
         <TextBlock x:Name="TimerTextBlock" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Text="2:30:00"/>
