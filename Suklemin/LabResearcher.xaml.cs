@@ -40,7 +40,7 @@ namespace Suklemin
         /// <summary>
         /// Переменная запрета на отправки более чем 1 сообщения
         /// </summary>
-        bool kek = false; 
+        bool kek = false;
         TimeSpan time = TimeSpan.FromSeconds(9000);
         /// <summary>
         /// Счётчик таймера за каждую секунду, а так же предупреждение при остатке 15 минут
@@ -131,7 +131,7 @@ namespace Suklemin
                             JavaScriptSerializer serializer = new JavaScriptSerializer();
                             getAnalizator = serializer.Deserialize<GetAnalizator>(json);
                             checks(getAnalizator);
-                            
+
                         }
                     }
                     var httpResponseLedetect = (HttpWebResponse)httpWebRequestLedetect.GetResponse();
@@ -160,7 +160,7 @@ namespace Suklemin
         string allText = null; // ← Переменная текста для вывода результатов на форму
         public void checks(GetAnalizator getAnalizator)
         {
-            
+
             int i = 0;
             foreach (Services serv in getAnalizator.services)
             {
@@ -229,6 +229,9 @@ namespace Suklemin
                 }
                 //Добавление данных в бд при результате не являющимся числом ↑
                 i++;
+                Temps.ReloadLists();
+                DataGrid.ItemsSource = null;
+                DataGrid.ItemsSource = Temps.orders.Where(x => x.statusOrder == 2);
             }
         }
         /// <summary>
@@ -279,14 +282,14 @@ namespace Suklemin
                 }
                 else { MessageBox.Show("Ошибка отправки на Biorad"); }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
 
             services.Clear();
-            ThisResearchs1 = ThisResearchs.Where(x => x.analisator == 1).ToList() ;
+            ThisResearchs1 = ThisResearchs.Where(x => x.analisator == 1).ToList();
 
             foreach (HistoryResearch_ res in ThisResearchs1)
             {
@@ -323,7 +326,7 @@ namespace Suklemin
                 }
                 else { MessageBox.Show("Ошибка отправки на Ledetect"); }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
