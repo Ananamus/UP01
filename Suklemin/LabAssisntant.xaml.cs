@@ -341,9 +341,8 @@ namespace Suklemin
             var imageType = "Jpeg";// тип картинки в переменной вар
             var imageFormat = (BarCodeImageFormat)Enum.Parse(typeof(BarCodeImageFormat), imageType);// сначала штрихкод потом конвертируем формат
             var encodeType = EncodeTypes.Code128;
-            string imagePath = "Code128_" + ch.ToString() + "." + imageType;// название пути 
+            
             string TextBarcode = ThisOrder.id.ToString();
-            TextBarcode += DateTime.Now.ToString("ddMMyyyy");
             if (ThisOrder.id.ToString().Length == 1)
             {
                 TextBarcode = "00" + ThisOrder.id.ToString();
@@ -352,10 +351,12 @@ namespace Suklemin
             {
                 if (ThisOrder.id.ToString().Length == 2) TextBarcode = "0" + ThisOrder.id.ToString();
             }
+            TextBarcode += DateTime.Now.ToString("ddMMyyyy");
             foreach (HistoryResearch_ histories in hists)
             {
+                string imagePath = "Code128_" + ch.ToString() + "." + imageType;// название пути 
                 Random rand = new Random();
-                BarcodeGenerator generator = new BarcodeGenerator(encodeType, TextBarcode + rand.Next(100000, 999999).ToString());
+                BarcodeGenerator generator = new BarcodeGenerator(encodeType, TextBarcode + (rand.Next(100000, 999999)).ToString());
                 generator.Save(imagePath, imageFormat);
                 generator.Dispose();
                 ch++;
@@ -364,7 +365,7 @@ namespace Suklemin
                 {
                     document.Open();
                     //вставка изображения штрихкода
-                    var logo = iTextSharp.text.Image.GetInstance(new FileStream(Environment.CurrentDirectory.ToString() + @"\Code128" + (ch - 1).ToString() + ".Jpeg", FileMode.Open));//готовим переменую для хранения в ней фотки
+                    var logo = iTextSharp.text.Image.GetInstance(new FileStream(Environment.CurrentDirectory.ToString() + @"\Code128_" + (ch - 1).ToString() + ".Jpeg", FileMode.Open));//готовим переменую для хранения в ней фотки
                     logo.SetAbsolutePosition(0, 680);//кординаты для картинки
                     writer.DirectContent.AddImage(logo);// добавляем картинку
                     BaseFont baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//берем ариал так как нормально воспринимет русский текст
