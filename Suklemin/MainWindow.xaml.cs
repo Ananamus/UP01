@@ -128,6 +128,11 @@ namespace Suklemin
                                             Show();
                                             break;
                                         case 2: // Бухгалтер
+                                            Accounant ac = new Accounant();
+                                            Hide();
+                                            ac.Name.Text = $"Здравстуйте {user.secondName} {user.firstName} {user.thirdName}\n{user.Role_.name}";
+                                            ac.ShowDialog();
+                                            Show();
                                             break;
                                         case 3: //Пациент
                                             break;

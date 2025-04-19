@@ -106,43 +106,6 @@ namespace Suklemin
                 {
                     TextBoxID.Text = (Temps.orders.Last().id + 1).ToString();
                 }
-                var imageType = "Jpeg";// тип картинки в переменной вар
-                var imageFormat = (BarCodeImageFormat)Enum.Parse(typeof(BarCodeImageFormat), imageType);// сначала штрихкод потом конвертируем формат
-                var encodeType = EncodeTypes.Code128;
-                string imagePath = "Code128_" + ch.ToString() + "." + imageType;// название пути 
-                string imagePath1 = "Code128" + ch.ToString() + "." + imageType;// название пути 
-                string TextBarcode = TextBoxID.Text;
-                if (TextBoxID.Text.Count() == 1)
-                {
-                    TextBarcode = "00" + TextBoxID.Text;
-                }
-                else
-                {
-                    if (TextBoxID.Text.Count() == 2) TextBarcode = "0" + TextBoxID.Text;
-                }
-                Random rand = new Random();
-                TextBarcode += DateTime.Now.ToString("ddMMyyyy") + rand.Next(100000, 999999).ToString();
-                BarcodeGenerator generator = new BarcodeGenerator(encodeType, TextBarcode);
-                generator.Save(imagePath, imageFormat);
-                generator.Save(imagePath1, imageFormat);
-                BarcodeImage.Source = new BitmapImage(new Uri(Path.GetFullPath(imagePath)));
-                generator.Dispose();
-                ch++;
-
-                var document = new iTextSharp.text.Document();
-                using (var writer = PdfWriter.GetInstance(document, new FileStream("result.pdf", FileMode.Create)))
-                {
-                    document.Open();
-                    //вставка изображения штрихкода
-                    var logo = iTextSharp.text.Image.GetInstance(new FileStream(Environment.CurrentDirectory.ToString() + @"\Code128" + (ch - 1).ToString() + ".Jpeg", FileMode.Open));//готовим переменую для хранения в ней фотки
-                    logo.SetAbsolutePosition(0, 680);//кординаты для картинки
-                    writer.DirectContent.AddImage(logo);// добавляем картинку
-                    BaseFont baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//берем ариал так как нормально воспринимет русский текст
-                    iTextSharp.text.Font helvetica1 = new iTextSharp.text.Font(baseFont, 78, iTextSharp.text.Font.NORMAL);
-                    document.Add(new iTextSharp.text.Paragraph(" ", helvetica1));
-                    document.Close();
-                    writer.Close();
-                }
             }
 
         }
@@ -371,6 +334,46 @@ namespace Suklemin
         private void Create_LostFocus(object sender, RoutedEventArgs e)
         {
             Sum.Visibility = Visibility.Collapsed;
+        }
+
+        private void PDF_Click(object sender, RoutedEventArgs e)
+        {
+            var imageType = "Jpeg";// тип картинки в переменной вар
+            var imageFormat = (BarCodeImageFormat)Enum.Parse(typeof(BarCodeImageFormat), imageType);// сначала штрихкод потом конвертируем формат
+            var encodeType = EncodeTypes.Code128;
+            string imagePath = "Code128_" + ch.ToString() + "." + imageType;// название пути 
+            string TextBarcode = ThisOrder.id.ToString();
+            TextBarcode += DateTime.Now.ToString("ddMMyyyy");
+            if (ThisOrder.id.ToString().Length == 1)
+            {
+                TextBarcode = "00" + ThisOrder.id.ToString();
+            }
+            else
+            {
+                if (ThisOrder.id.ToString().Length == 2) TextBarcode = "0" + ThisOrder.id.ToString();
+            }
+            foreach (HistoryResearch_ histories in hists)
+            {
+                Random rand = new Random();
+                BarcodeGenerator generator = new BarcodeGenerator(encodeType, TextBarcode + rand.Next(100000, 999999).ToString());
+                generator.Save(imagePath, imageFormat);
+                generator.Dispose();
+                ch++;
+                var document = new iTextSharp.text.Document();
+                using (var writer = PdfWriter.GetInstance(document, new FileStream($"result{ch}.pdf", FileMode.Create)))
+                {
+                    document.Open();
+                    //вставка изображения штрихкода
+                    var logo = iTextSharp.text.Image.GetInstance(new FileStream(Environment.CurrentDirectory.ToString() + @"\Code128" + (ch - 1).ToString() + ".Jpeg", FileMode.Open));//готовим переменую для хранения в ней фотки
+                    logo.SetAbsolutePosition(0, 680);//кординаты для картинки
+                    writer.DirectContent.AddImage(logo);// добавляем картинку
+                    BaseFont baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);//берем ариал так как нормально воспринимет русский текст
+                    iTextSharp.text.Font helvetica1 = new iTextSharp.text.Font(baseFont, 78, iTextSharp.text.Font.NORMAL);
+                    document.Add(new iTextSharp.text.Paragraph(" ", helvetica1));
+                    document.Close();
+                    writer.Close();
+                }
+            }
         }
     }
 }

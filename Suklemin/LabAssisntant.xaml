@@ -79,6 +79,7 @@
                     <ComboBox IsEnabled="False" x:Name="ServiceCombobox" VerticalAlignment="Top" DisplayMemberPath="name" HorizontalAlignment="Right" Height="20" Width="100" Margin="0,5,5,0" SelectionChanged="ServiceCombobox_SelectionChanged" Grid.Column="0"/>
                     <ComboBox x:Name="UsersCombo" IsReadOnly="True" IsEditable="False" IsEnabled="False" DisplayMemberPath="FullName" VerticalAlignment="Top" HorizontalAlignment="Left" Height="20" Width="150" Margin="5,5,0,0" Grid.Column="0" SelectionChanged="UsersCombo_SelectionChanged" />
                     <Button x:Name="Uslugi" IsEnabled="False" Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Content="Добавить услуги к заказу" Click="Button_Click_2"/>
+                    <Button x:Name="PDF" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Создание PDF" Click="PDF_Click"/>
                     <DataGrid x:Name="ServiceDataGrid" IsReadOnly="true" Grid.Column="2" AutoGenerateColumns="false">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Заказ" Binding="{Binding orderId}"/>
