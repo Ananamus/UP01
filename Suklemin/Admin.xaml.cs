@@ -122,7 +122,7 @@ namespace Suklemin
                                 thirdName = ThirdNameTextBox.Text,
                                 birthDate = DateBirth.SelectedDate,
                                 E_mail = EmailTextBox.Text,
-                                role = RolesCombo.SelectedIndex+1,
+                                role = RolesCombo.SelectedIndex + 1,
                                 login = LoginTextBox.Text,
                                 passport = PassportTextBox.Text,
                                 password = PasswordTextBox.Text,
@@ -136,9 +136,11 @@ namespace Suklemin
                             MessageBox.Show("Пользователь создан");
                             ClearAllTextboxes();
                         }
-                    }
-                }
+                        else MessageBox.Show("Заполните поля");
+                    } else MessageBox.Show("Почта введена неверно");
+                } else MessageBox.Show("Пароль введён неверно");
             }
+            else MessageBox.Show("Логин введён неверно");
         }
         /// <summary>
         /// Очистка текстбоксов в отдельном методе из-за излишнего кода там ↑
