@@ -88,21 +88,21 @@ namespace Suklemin
                         Users_ user = Temps.users.FirstOrDefault(x => x.login == LoginTextBox.Text);
                         if (user != null)
                         {
-                            TimeSpan? schet = TimeSpan.MaxValue;
+                            TimeSpan? times = TimeSpan.MaxValue;
                             if (user.role == 4 || user.role == 5)
                             {
                                 List<HistoryEnter_> Historys = bd.HistoryEnter_.Where(x => x.userId == user.id && x.erorId == 1).ToList();
                                 if (Historys.Count > 0)
                                 {
-                                    schet = DateTime.Now - Historys.Last().date;
+                                    times = DateTime.Now - Historys.Last().date;
                                 }
                                 else
                                 {
-                                    schet = DateTime.Now - DateTime.MinValue;
+                                    times = DateTime.Now - DateTime.MinValue;
                                 }
                             }
 
-                            if (schet > TimeSpan.FromHours(3))
+                            if (times > TimeSpan.FromHours(3))
                             {
                                 if (user.password == PasswordBox.Password)
                                 {

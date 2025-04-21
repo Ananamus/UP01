@@ -29,6 +29,9 @@ namespace Suklemin
             Temps.ReloadLists();
             Grid.ItemsSource = Temps.enters;
             LoginCombobox.ItemsSource = Temps.users;
+            ComboType.ItemsSource = Temps.bd.Type_.ToList();
+            InsCompanyCombo.ItemsSource = Temps.bd.InsuranceCompany_.ToList();
+            RolesCombo.ItemsSource = Temps.bd.Role_.ToList();
         }
         /// <summary>
         /// Отображения текста в зависимости от вкладок
@@ -109,7 +112,7 @@ namespace Suklemin
         {
             if (Class1.Login_check(LoginTextBox.Text) && !Temps.users.Exists(x => x.login == LoginTextBox.Text))
             {
-                if (Class1.Password_check(PassportTextBox.Text))
+                if (Class1.Password_check(PasswordTextBox.Text))
                 {
                     if (Class1.Mail_check(EmailTextBox.Text))
                     {

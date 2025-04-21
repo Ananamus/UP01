@@ -36,12 +36,17 @@ namespace Suklemin
             ComboAna.ItemsSource = Temps.bd.Analizators_.ToList();
             //Заполнение данных в поля ↑
         }
-
+        /// <summary>
+        /// Количество секунд вычета из общего времени
+        /// </summary>
         TimeSpan seconds = TimeSpan.FromSeconds(0);
         /// <summary>
         /// Переменная запрета на отправки более чем 1 сообщения
         /// </summary>
         bool kek = false;
+        /// <summary>
+        /// Максимальное количество времени таймера
+        /// </summary>
         TimeSpan time = TimeSpan.FromSeconds(9000);
         /// <summary>
         /// Счётчик таймера за каждую секунду, а так же предупреждение при остатке 15 минут
